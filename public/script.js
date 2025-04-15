@@ -1,8 +1,18 @@
-let currentImage = null; // Store the current image
-let currentInput = null; // Store the current user input
-let currentCanvasData = null; // Store the canvas data URL for sharing
+let currentImage = null;
+let currentInput = null;
 
-// Function to wrap text
+// Show the main content after a short delay
+document.addEventListener("DOMContentLoaded", () => {
+  const initialLoader = document.getElementById("initialLoader");
+  const mainContent = document.getElementById("mainContent");
+
+  // Fade out the initial loader after 2 seconds
+  setTimeout(() => {
+    initialLoader.classList.add("fade-out");
+    mainContent.style.display = "block";
+  }, 2000); // 2-second delay for the welcome animation
+});
+
 function wrapText(ctx, text, maxWidth) {
   const words = text.split(" ");
   let lines = [];
@@ -22,14 +32,14 @@ function wrapText(ctx, text, maxWidth) {
   return lines;
 }
 
-// Function to draw the meme
 async function drawMeme(img, caption) {
   const canvas = document.getElementById("memeCanvas");
   const buttonGroup = document.getElementById("buttonGroup");
   const output = document.getElementById("memeOutput");
+  const loadingSpinner = document.getElementById("loadingSpinner");
   const ctx = canvas.getContext("2d");
 
-  const maxWidth = 500;
+  const maxWidth = 600; // Updated to match styles.css max-width
   let width = img.width;
   let height = img.height;
 
@@ -66,7 +76,7 @@ async function drawMeme(img, caption) {
   canvas.style.display = "block";
   output.style.display = "none";
   buttonGroup.style.display = "flex";
-  currentCanvasData = canvas.toDataURL("image/png"); // Store canvas data for sharing
+  loadingSpinner.style.display = "none"; // Hide spinner after drawing
 }
 
 async function generateMeme() {
@@ -75,12 +85,13 @@ async function generateMeme() {
   let output = document.getElementById("memeOutput");
   let canvas = document.getElementById("memeCanvas");
   let buttonGroup = document.getElementById("buttonGroup");
+  let loadingSpinner = document.getElementById("loadingSpinner");
 
-  // Clear previous output and show "Generating..."
   output.innerText = "Generating...";
   output.style.display = "block";
   canvas.style.display = "none";
   buttonGroup.style.display = "none";
+  loadingSpinner.style.display = "flex"; // Show spinner during API call
 
   try {
     const response = await fetch("/generate-meme", {
@@ -94,8 +105,8 @@ async function generateMeme() {
       if (imageInput) {
         let img = new Image();
         img.onload = function () {
-          currentImage = img; // Store the image
-          currentInput = input; // Store the input
+          currentImage = img;
+          currentInput = input;
           drawMeme(img, data.caption);
         };
         img.src = URL.createObjectURL(imageInput);
@@ -103,16 +114,19 @@ async function generateMeme() {
         output.innerText = data.caption;
         output.style.display = "block";
         buttonGroup.style.display = "none";
+        loadingSpinner.style.display = "none"; // Hide spinner
       }
     } else {
       output.innerText = data.error || "Oops, something went wrong!";
       output.style.display = "block";
       buttonGroup.style.display = "none";
+      loadingSpinner.style.display = "none"; // Hide spinner
     }
   } catch (error) {
     output.innerText = "Error generating meme. Try again!";
     output.style.display = "block";
     buttonGroup.style.display = "none";
+    loadingSpinner.style.display = "none"; // Hide spinner
     console.error(error);
   }
 }
@@ -124,8 +138,10 @@ async function regenerateCaption() {
   }
 
   let output = document.getElementById("memeOutput");
+  let loadingSpinner = document.getElementById("loadingSpinner");
   output.innerText = "Regenerating caption...";
   output.style.display = "block";
+  loadingSpinner.style.display = "flex"; // Show spinner during API call
 
   try {
     const response = await fetch("/generate-meme", {
@@ -140,10 +156,12 @@ async function regenerateCaption() {
     } else {
       output.innerText = data.error || "Oops, something went wrong!";
       output.style.display = "block";
+      loadingSpinner.style.display = "none"; // Hide spinner
     }
   } catch (error) {
     output.innerText = "Error regenerating caption. Try again!";
     output.style.display = "block";
+    loadingSpinner.style.display = "none"; // Hide spinner
     console.error(error);
   }
 }
@@ -154,28 +172,4 @@ function downloadMeme() {
   link.download = "meme.png";
   link.href = canvas.toDataURL("image/png");
   link.click();
-}
-
-async function shareOnX() {
-  let output = document.getElementById("memeOutput");
-  output.innerText = "Sharing on X...";
-  output.style.display = "block";
-
-  try {
-    const response = await fetch("/share-on-x", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ imageData: currentCanvasData }),
-    });
-    const data = await response.json();
-
-    if (data.success) {
-      output.innerText = "Successfully shared on X!";
-    } else {
-      output.innerText = data.error || "Failed to share on X.";
-    }
-  } catch (error) {
-    output.innerText = "Error sharing on X. Try again!";
-    console.error(error);
-  }
 }
