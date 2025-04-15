@@ -6,11 +6,15 @@
         "use": "@vercel/node"
       },
       {
-        "src": "index.html",
+        "src": "public/**",
         "use": "@vercel/static"
       }
     ],
     "routes": [
+      {
+        "src": "/(styles.css|script.js)",
+        "dest": "/public/$1"
+      },
       {
         "src": "/generate-meme",
         "dest": "server.js"
@@ -20,12 +24,8 @@
         "dest": "server.js"
       },
       {
-        "src": "/(styles.css|script.js)",
-        "dest": "/$1"
-      },
-      {
         "src": "/(.*)",
-        "dest": "index.html"
+        "dest": "/public/index.html"
       }
     ]
   }
