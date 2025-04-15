@@ -50,10 +50,10 @@ input {
 }
 
 .pill-button {
-  background-color: #4CAF50;
-  color: white;
+  background-color: transparent; /* Transparent background for the pill button */
+  color: rgb(44, 98, 215);
   border: none;
-  border-radius: 20px; /* Pill shape with rounded ends */
+  border-radius: 5px; 
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@ input {
 }
 
 .pill-button:hover {
-  background-color: #45a049;
+  background-color: transparent;
 }
 
 .pill-button.text-hidden {

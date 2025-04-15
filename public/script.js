@@ -108,6 +108,15 @@ async function generateMeme() {
   let buttonGroup = document.getElementById("buttonGroup");
   let loadingSpinner = document.getElementById("loadingSpinner");
 
+  // Input validation: Check if text input is empty
+  if (!input.trim()) {
+    output.innerText = "Please enter a meme description!";
+    output.style.display = "block";
+    canvas.style.display = "none";
+    buttonGroup.style.display = "none";
+    return; // Stop execution if input is empty
+  }
+
   output.innerText = "Generating...";
   output.style.display = "block";
   canvas.style.display = "none";
