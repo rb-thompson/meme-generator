@@ -20,6 +20,10 @@
         "dest": "server.js"
       },
       {
+        "src": "/(styles.css|script.js)",
+        "dest": "/$1"
+      },
+      {
         "src": "/(.*)",
         "dest": "index.html"
       }
