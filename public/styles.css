@@ -1,97 +1,215 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    margin: 50px;
-    background-color: #f5f5f5; /* Light gray background for light-mode feel */
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px; /* Reduced margin for mobile */
+  background-color: #f5f5f5; /* Light gray background for light-mode feel */
+}
+
+h1 {
+  color: #222222;
+  font-size: 2rem; /* 32px on desktop */
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1rem; /* 16px on desktop */
+  color: #333;
+  max-width: 600px;
+  margin: 10px auto 20px auto;
+  line-height: 1.5;
+}
+
+input {
+  padding: 10px;
+  width: 300px;
+  max-width: 100%; /* Ensure inputs don't overflow on mobile */
+  margin: 10px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box; /* Include padding in width */
+  display: block; /* Ensure inputs stack on mobile */
+}
+
+.memeInput {
+  font-size: 1.25rem; /* 20px on desktop */
+  display: block;
+  margin: 10px auto;
+  max-width: 600px;
+}
+
+/* Consistent button style */
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  min-width: 150px;
+  margin: 5px;
+  touch-action: manipulation; /* Improve touch responsiveness */
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#memeOutput {
+  background-color: transparent;
+  color: white;
+  font-family: "Impact", sans-serif;
+  font-size: 1.5rem; /* 24px on desktop */
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px black;
+  text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+
+#memeCanvas {
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+#buttonGroup {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  max-width: 600px; /* Match the max width of the meme image */
+}
+
+#regenerateButton, #downloadButton {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
+  min-width: 150px;
+  margin: 5px;
+  touch-action: manipulation;
+}
+
+#regenerateButton:hover, #downloadButton:hover {
+  background-color: #45a049;
+}
+
+footer {
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+footer a {
+  color: #255326;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  body {
+    margin: 10px; /* Less margin on mobile */
   }
-  
+
   h1 {
-    color: #222222;
+    font-size: 1.5rem; /* 24px on mobile */
   }
-  
-  p.description {
-    font-size: 16px;
-    color: #333;
-    max-width: 500px;
-    margin: 10px auto 20px auto;
-    line-height: 1.5;
+
+  p {
+    font-size: 0.9rem; /* 14px on mobile */
+    margin: 5px auto 15px auto;
   }
-  
+
   input {
-    padding: 10px;
-    width: 300px;
-    margin: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px; /* Rounded corners for inputs */
+    width: 100%; /* Full width on mobile */
+    padding: 8px; /* Slightly smaller padding */
+    font-size: 0.9rem; /* 14px on mobile */
   }
 
   .memeInput {
-    font-size: 20px;
-    display: block;
-    margin: 10px auto;
-    max-width: 600px;
-  }
-  
-  /* Consistent button style */
-  button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px; /* Rounded corners */
-    font-size: 16px;
-    min-width: 150px; /* Consistent width */
-    margin: 5px;
-  }
-  
-  button:hover {
-    background-color: #45a049;
-  }
-  
-  #memeOutput {
-    background-color: transparent;
-    color: white;
-    font-family: "Impact", sans-serif;
-    font-size: 24px;
-    text-transform: uppercase;
-    -webkit-text-stroke: 1px black;
-    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
-    padding: 20px;
-    max-width: 600px; /* Match the width of the input elements */
-    width: 100%; /* Ensure it fills the max-width */
-    margin: 20px auto;
-    box-sizing: border-box; /* Include padding in width calculation */
-  }
-  
-  #memeCanvas {
+    font-size: 1rem; /* 16px on mobile */
     max-width: 100%;
-    height: auto;
-    margin: 20px auto;
-    display: block;
   }
-  
+
+  button {
+    padding: 8px 16px; /* Slightly smaller padding */
+    font-size: 0.9rem; /* 14px on mobile */
+    min-width: 120px; /* Smaller buttons on mobile */
+  }
+
+  #memeOutput {
+    font-size: 1.2rem; /* 19px on mobile */
+    max-width: 100%; /* Full width on mobile */
+    padding: 15px;
+  }
+
   #buttonGroup {
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap; /* Allow buttons to wrap if needed */
-    max-width: 600px; /* Match the max width of the meme image */
+    max-width: 100%; /* Full width on mobile */
+    gap: 8px; /* Smaller gap */
   }
-  
-  #regenerateButton, #downloadButton, #shareButton {
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px; /* Ensure rounded corners */
-    font-size: 16px;
-    min-width: 150px; /* Consistent width */
-    margin: 5px;
+
+  #regenerateButton, #downloadButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    min-width: 120px;
   }
-  
-  #regenerateButton:hover, #downloadButton:hover, #shareButton:hover {
-    background-color: #45a049;
+
+  footer {
+    font-size: 0.8rem; /* 13px on mobile */
+    margin-top: 20px;
   }
+}
+
+/* Extra small screens (e.g., very narrow phones) */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem; /* 19px on very small screens */
+  }
+
+  p {
+    font-size: 0.8rem; /* 13px */
+  }
+
+  input {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .memeInput {
+    font-size: 0.9rem; /* 14px on very small screens */
+  }
+
+  button {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-width: 100px;
+  }
+
+  #memeOutput {
+    font-size: 1rem; /* 16px */
+    padding: 10px;
+  }
+
+  #regenerateButton, #downloadButton {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    min-width: 100px;
+  }
+
+  footer {
+    font-size: 0.7rem; /* 11px on very small screens */
+  }
+}
