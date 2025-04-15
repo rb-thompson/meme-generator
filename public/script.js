@@ -10,7 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
   setTimeout(() => {
     initialLoader.classList.add("fade-out");
     mainContent.style.display = "block";
-  }, 2000); // 2-second delay for the welcome animation
+  }, 2000);
+});
+
+// Handle image upload button icon change
+document.getElementById("imageInput").addEventListener("change", () => {
+  const imageInput = document.getElementById("imageInput");
+  const uploadIcon = document.getElementById("uploadIcon");
+  const uploadButton = document.getElementById("uploadButton");
+
+  if (imageInput.files && imageInput.files.length > 0) {
+    uploadIcon.className = "fas fa-thumbs-up pop"; // Change to checkmark icon with pop animation
+    uploadButton.classList.add("text-hidden"); // Hide the text
+  } else {
+    uploadIcon.className = "fas fa-image"; // Revert to image icon
+    uploadButton.classList.remove("text-hidden"); // Show the text
+  }
 });
 
 function wrapText(ctx, text, maxWidth) {
@@ -37,6 +52,9 @@ async function drawMeme(img, caption) {
   const buttonGroup = document.getElementById("buttonGroup");
   const output = document.getElementById("memeOutput");
   const loadingSpinner = document.getElementById("loadingSpinner");
+  const uploadIcon = document.getElementById("uploadIcon");
+  const uploadButton = document.getElementById("uploadButton");
+  const imageInput = document.getElementById("imageInput");
   const ctx = canvas.getContext("2d");
 
   const maxWidth = 600; // Updated to match styles.css max-width
@@ -76,7 +94,10 @@ async function drawMeme(img, caption) {
   canvas.style.display = "block";
   output.style.display = "none";
   buttonGroup.style.display = "flex";
-  loadingSpinner.style.display = "none"; // Hide spinner after drawing
+  loadingSpinner.style.display = "none";
+  uploadIcon.className = "fas fa-upload"; // Reset to upload icon
+  uploadButton.classList.remove("text-hidden"); // Show the text
+  imageInput.value = ""; // Clear the file input
 }
 
 async function generateMeme() {
