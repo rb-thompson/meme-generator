@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Meme Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>AI Meme Generator</h1>
+  
+  <p>Type a funny idea (e.g., "Nerd action figure"), optionally upload an image, and click "Generate Meme" to create your meme!</p>
+  <input type="text" class="memeInput" id="memeInput" placeholder="Describe your meme idea...">
+  <input type="file" id="imageInput" accept="image/*">
+  <button onclick="generateMeme()">Generate Meme</button>
+  <canvas id="memeCanvas" style="display: none;"></canvas>
+  <div id="buttonGroup" style="display: none;">
+    <button id="regenerateButton" onclick="regenerateCaption()">Regenerate Caption</button>
+    <button id="downloadButton" onclick="downloadMeme()">Download Meme</button>
+    <button id="shareButton" onclick="shareOnX()">Share on X</button>
+  </div>
+  <p id="memeOutput">Your meme will appear here!</p>
+
+  <footer>
+    <p><small>© 2025 <a href="https://rbthompson.io">rbthompson.io</a><br>
+      Powered by <a href="https://x.ai">Grok 3</a>.</small></p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

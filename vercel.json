@@ -1,0 +1,27 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "index.html",
+        "use": "@vercel/static"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/generate-meme",
+        "dest": "server.js"
+      },
+      {
+        "src": "/share-on-x",
+        "dest": "server.js"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "index.html"
+      }
+    ]
+  }
