@@ -1,3 +1,4 @@
+require("dotenv").config();  // Local development only
 const express = require("express");
 const axios = require("axios");
 const { TwitterApi } = require("twitter-api-v2"); // Import the new library
